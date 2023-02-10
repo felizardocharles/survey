@@ -25,9 +25,10 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('employees.create');
+        $page = $request->page;
+        return view('employees.create',compact('page'));
     }
 
     /**
@@ -38,6 +39,8 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        $input = $request->all();
+
         $request->validate([
             'name' => 'required|string|min:3|max:255',
             'picture' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
@@ -46,8 +49,8 @@ class EmployeeController extends Controller
         $employee = new Employee();
         $employee->name = $request->input('name');
 
-        if ($request->hasFile(' picture')) {
-            $picture = $request->file(' picture');
+        if ($request->hasFile('picture')) {
+            $picture = $request->file('picture');
             $picture_name = time() . '.' . $picture->getClientOriginalExtension();
             $picture->move(public_path('images'), $picture_name);
             $employee-> picture = $picture_name;
@@ -55,8 +58,13 @@ class EmployeeController extends Controller
 
         $employee->save();
 
-        return redirect()->route('employees.index')
-            ->with('success', 'Employee created successfully');
+        $currentPage = $input['page'];
+        $paginator = Employee::paginate(3); // Aqui supomos que não existe filtro 
+        $lastPage = $paginator->lastPage();
+        $redirectToPage = ($currentPage <= $lastPage) ? $currentPage : $lastPage;
+
+        return redirect()->route('employees.index', ['page' => $redirectToPage])
+            ->with('success', 'Employee created successfully.');
     }
 
     /**

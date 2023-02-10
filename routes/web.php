@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/start', function(){ return view('start'); });
 
-Route::resource('employees', EmployeeController::class);
+Route::resource('employees', EmployeeController::class)->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

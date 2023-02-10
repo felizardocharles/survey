@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('Dashboard') }}
+            Edit Employee
         </h2>
     </x-slot>
 
@@ -33,14 +33,14 @@
                         <label class="block mb-2 text-sm font-bold text-gray-700" for="name">
                             Name:
                         </label>
-                        <input type="text" name="name" value="{{ $employee->name }}" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Name">
+                        <input type="text" name="name" value="{{ $employee->name }}" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Name" />
                     </div>
 
                     <div>
                         <label class="block mb-2 text-sm font-bold text-gray-700" for="picture">
                             Picture:
                         </label>
-                        <input type="file" name="picture" value="" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Picture">
+                        <input type="file" name="picture" value="" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Picture" />
 
                         <br />
                         <img src="{{ asset('images/' . $employee->picture) }}" width="100" />

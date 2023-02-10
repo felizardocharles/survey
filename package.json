@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host laravel.test",
     "build": "vite build"
   },
   "devDependencies": {
