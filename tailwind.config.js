@@ -8,6 +8,11 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/**/*.js',
     ],
+    safelist: [
+      'text-blue-400',
+      'text-red-400',
+      'text-green-400',
+    ],
 
     theme: {
         extend: {
